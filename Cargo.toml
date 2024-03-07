@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+    "host",
+    "methods"
+]
+
+# Always optimize; otherwise tests take excessively long.
+[profile.dev]
+opt-level = 3
+
+[profile.dev.build-override]
+opt-level = 3
+
+[profile.release]
+lto = true
+
+[profile.release.build-override]
+opt-level = 3
