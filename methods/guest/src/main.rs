@@ -1,6 +1,10 @@
 use ark_bn254::Fr as Fr1;
 use ark_bn254_r0::Fr as Fr2;
+use ark_bn254::G1Affine as G11;
+use ark_bn254_r0::G1Affine as G12;
+use ark_ec::AffineRepr;
 use std::str::FromStr;
+use std::ops::Mul;
 use risc0_zkvm::guest::env;
 use ark_ff::Field;
 
@@ -38,7 +42,7 @@ fn main() {
     let c = a.inverse().unwrap();
     let end = env::cycle_count();
 
-    println!("NEW: a ^ -1 = c, c = {}, cycle = {}", c, end - begin);*/
+    println!("NEW: a ^ -1 = c, c = {}, cycle = {}", c, end - begin);
 
     let b = Fr1::from_str("17421865113601003971520074901102628465552788678455457825738060633073358930214").unwrap();
 
@@ -55,4 +59,24 @@ fn main() {
     let end = env::cycle_count();
 
     println!("NEW: sqrt(b) = c, c = {}, cycle = {}", c, end - begin);
+
+    let g = G11::generator();
+    let s = Fr1::from_str("14226294082152339227274917010873249985458047913852393750281719691125978796426").unwrap();
+
+    let begin = env::cycle_count();
+    let c = g.mul(&s);
+
+    let end = env::cycle_count();
+
+    println!("OLD: a * g = c, c = {}, cycle = {}", c, end - begin);
+
+    let g = G12::generator();
+    let s = Fr2::from_str("14226294082152339227274917010873249985458047913852393750281719691125978796426").unwrap();
+
+    let begin = env::cycle_count();
+    let c = g.mul(&s);
+
+    let end = env::cycle_count();
+
+    println!("NEW: a * g = c, c = {}, cycle = {}", c, end - begin);
 }

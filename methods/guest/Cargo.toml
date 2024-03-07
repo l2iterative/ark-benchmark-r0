@@ -9,6 +9,7 @@ edition = "2021"
 risc0-zkvm = { git = "https://github.com/l2iterative/risc0-bigint", default-features = false, features = [ "std" ] }
 ark-bn254 = { git = "https://github.com/arkworks-rs/algebra" }
 ark-ff = { git = "https://github.com/arkworks-rs/algebra" }
+ark-ec = { git = "https://github.com/arkworks-rs/algebra" }
 ark-bn254-r0 = { git = "https://github.com/l2iterative/ark-bn254-r0/" }
 ahash = "=0.8.6"
 
